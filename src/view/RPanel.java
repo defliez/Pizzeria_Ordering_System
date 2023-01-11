@@ -57,7 +57,6 @@ public class RPanel extends JPanel {
         btnViewSelectedOrder.setLocation(width / 5, height - 75);
         btnViewSelectedOrder.addActionListener(l -> mainFrame.buttonPressed(ButtonType.ViewOrder));
         this.add(btnViewSelectedOrder);
-
     }
 
     /**

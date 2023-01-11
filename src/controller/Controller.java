@@ -8,6 +8,12 @@ import view.MainFrame;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * This class is the controller of the application.
+ * It is responsible for the communication between the model and the view, and the sequences of the application.
+ *
+ * @author Valentino Glave
+ */
 public class Controller implements MenuController {
 
     // View
@@ -20,6 +26,11 @@ public class Controller implements MenuController {
     private ArrayList<Order> orderHistoryMenuString; // Array of order history
     Order currentOrder;
 
+    /**
+     * Constructor for the controller.
+     * It instantiates the instance variables.
+     * It also adds the menu items to the menu and enables the buttons.
+     */
     public Controller() {
         view = new MainFrame(1000, 500, this);
         foodMenuString = new ArrayList<MenuItem>();
@@ -42,7 +53,9 @@ public class Controller implements MenuController {
         view.disableViewSelectedOrderButton();
     }
 
-    // Clears both panels and displays a default message
+    /**
+     * Clears both panels and displays a default message.
+     */
     public void clearList() {
         ArrayList<MenuItem> defaultList = new ArrayList<>();
         defaultList.add(new DummyMenuItem("Nothing selected"));
@@ -50,7 +63,12 @@ public class Controller implements MenuController {
         view.populateRightPanel(defaultList);
     }
 
-    //This method is called by class MainFrame when a button in the GUI is pressed
+    /**
+     * This method is called by class MainFrame when a button in the GUI is pressed.
+     * It is responsible for the communication between the model and the view, and the sequences of the application.
+     *
+     * @param buttonType The button that was pressed.
+     */
     public void buttonPressed(ButtonType button) {
 
         switch (button) {
@@ -84,7 +102,11 @@ public class Controller implements MenuController {
         }
     }
 
-    // Adds an item to the current order.
+    /**
+     * Adds an item to the current order.
+     * It also updates the cost of the current order.
+     * @param item The item to be added.
+     */
     public void addItemToOrder(int selectionIndex) {
         if (selectionIndex != -1) { // if something is selected in the left menu list
             switch (currentLeftMenu) {
@@ -107,7 +129,9 @@ public class Controller implements MenuController {
         }
     }
 
-    // set the left panel to the food menu
+    /**
+     * Sets the left panel to the food menu.
+     */
     public void setToFoodMenu() {
         currentLeftMenu = ButtonType.Food;
         view.populateLeftPanel(foodMenuString);
@@ -123,7 +147,9 @@ public class Controller implements MenuController {
         view.disableViewSelectedOrderButton();
     }
 
-    // same as setToFoodMenu() but for drinks
+    /**
+     * Sets the left panel to the drink menu.
+     */
     public void setToDrinkMenu() {
         currentLeftMenu = ButtonType.Drinks;
         view.populateLeftPanel(drinkMenuString);
@@ -140,7 +166,9 @@ public class Controller implements MenuController {
         view.disableViewSelectedOrderButton();
     }
 
-    // set the left panel to the order history menu
+    /**
+     * Sets the left panel to the order history menu.
+     */
     public void setToOrderHistoryMenu() {
         currentLeftMenu = ButtonType.OrderHistory;
         clearList();
@@ -152,7 +180,10 @@ public class Controller implements MenuController {
         view.disableOrderButton();
     }
 
-    // create a new order and add it to the order history
+    /**
+     * Places the current order and adds it to the order history.
+     * It also clears the current order.
+     */
     public void placeOrder() {
 
         currentOrder = new Order(currentOrderArray);
@@ -188,7 +219,11 @@ public class Controller implements MenuController {
         }
     }
 
-    // view the selected order in the order history
+    /**
+     * View the selected order in the order history
+     *
+     * @param selectionIndex The index of the order to be viewed.
+     */
     public void viewSelectedOrder(int selectionIndex) {
         System.out.println("Index selection left panel: " + selectionIndex); //for test purposes  - remove when not needed
         if (selectionIndex != -1) { // if something is selected in the left menu list
@@ -202,8 +237,10 @@ public class Controller implements MenuController {
         }
     }
 
+    /**
+     * Main method to run the program.
+     */
     public static void main(String[] args) {
         new Controller();
     }
-
 }
